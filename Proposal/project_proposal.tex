@@ -1,0 +1,113 @@
+\documentclass[twoside,11pt]{article}
+
+% Any additional packages needed should be included after jmlr2e.
+% Note that jmlr2e.sty includes epsfig, amssymb, natbib and graphicx,
+% and defines many common macros, such as 'proof' and 'example'.
+%
+% It also sets the bibliographystyle to plainnat; for more information on
+% natbib citation styles, see the natbib documentation, a copy of which
+% is archived at http://www.jmlr.org/format/natbib.pdf
+
+\usepackage{jmlr2e}
+%\usepackage{parskip}
+
+% Definitions of handy macros can go here
+\newcommand{\dataset}{{\cal D}}
+\newcommand{\fracpartial}[2]{\frac{\partial #1}{\partial  #2}}
+% Heading arguments are {volume}{year}{pages}{submitted}{published}{author-full-names}
+
+% Short headings should be running head and authors last names
+\ShortHeadings{95-845: AAMLP Proposal}{Khin and Leahy}
+\firstpageno{1}
+
+\begin{document}
+
+\title{Heinz 95-845: Project Proposal}
+
+\author{\name Kaung M. Khin \email kkhin/kkhin@andrew.cmu.edu \\
+       \addr Heinz College\\
+       Carnegie Mellon University\\
+       Pittsburgh, PA, United States \\
+       \AND
+       \name Shawn Leahy \email sleahy/sleahy@andrew.cmu.edu \\
+       \addr Heinz College\\
+       Carnegie Mellon University\\
+       Pittsburgh, PA, United States}
+\maketitle
+\section{Introduction}
+Influenza, or simply the flu, is a seasonal contagious respiratory disease that
+affects millions of people in the United States yearly with outcomes ranging
+from just mild symptoms to even death. \citep{cdc} It is caused by the influenza virus with
+the most infamous version in recent time being the 1918 flu pandemic nicknamed
+the “Spanish Flu”. The economic cost of the flu on the United States is
+estimated to be in the billions \citep{rolfes_etal._2017} so the Center for Disease Control (CDC) tracks
+the seasonal flu using Flu Surveillance which is a collaborative effort between
+the CDC and many healthcare providers. \\
+The use of big data to track flu trends is not a novel idea \citep{ginsberg_2009}, in fact many
+studies have attempted to learn from the mistakes of Google Flu Trends. The
+challenges of using big data to attempt this type of prediction is
+well-documented. \citep{lazer_kennedy_king_vespignani_2014} However, there has been some success in the use of social media
+data and search data combined with health surveillance data to track and predict
+the number of cases for the Zika virus outbreak in Latin America. \citep{mcgough_brownstein_hawkins_santillana_2017} We will be
+using a variety of data sources to build a machine learning model to predict the
+number of actual flu cases in each state.
+\section{Analysis and Outcomes} \label{details}
+\begin{itemize}
+\item \textbf{Y:} Number of actual cases reported in a particular state/region
+\item \textbf{U:} There is no applicable treatment for our study
+\item \textbf{V:} We will use a number of data sources for our covariates but we will focus on the social media data, the health expenditure data and Google search data
+\item \textbf{W:} People who have filled out the MEPs survey for a given year
+\end{itemize} 
+\section{Importance and Contribution to Existing Literature}
+Demographic, hospital condition, and influenza surveillance data has been used
+to predict occurrences and investigate trends for influenza infections on U.S.
+military personnel. \citep{buczak_2016}  Machine learning methodologies have been used on medical
+data and have been found to be successful in extrapolating from incomplete data \citep{chen_2017, santillana_2016}.
+This paper seeks to merge these analyses together to predict influenza outbreaks
+on a more diverse dataset utilizing machine learning methodologies that may have
+to deal with incomplete information and using social media data to track changes
+in infection rates.
+\section{Methods}
+\subsection{Data}
+The Medical Expenditure Panel Survey is a set of large scale surveys of
+individuals, families, providers, and employers across the United States.  MEPS
+collects data health services, how frequently they are used, the cost of these
+services, and how they are paid for, as well as data on the cost, scope, and
+breadth of health insurance.  MEPS has been collected continually since 1996 \citep{meps}.
+We will be utilizing the full year data files, medical conditions files, and
+prescribed medicines files.  We will also be utilizing the Centers for Disease
+Control FluView Portal data in order to validate our results.  This portal
+accesses state, regional and national influenza statistics as well as mortality
+information \citep{cdc_interactive}. We are also attempting to include social media data to better
+track how fast and which geographic locations are experiencing influenza
+infections.
+\subsection{Modeling Approach}
+Our approach involves utilizing demographic, location, medical condition, and
+prescription drug information to predict susceptibility and frequency of
+influenza outbreaks in regions of the United States.  We will create regional
+models to classify if we predict an individual to contract influenza or not.
+Variables for regional infection frequencies, infection rates, and hospital
+visits due to influenza will be created.  Modeling approaches under
+consideration include logistic regression, SVMs, decision trees (and random
+forests), as well as neural networks.
+\subsection{Evaluation Measures}
+We will build a Naive Bayes model to predict influenza and this will be our
+baseline model to compare against due to its assumption of conditional
+independence.  We will measure the accuracy, sensitivity, specificity, and
+F1-score for our models to try and gain insights into the results.  We need an
+array of measures due to the fact that false positives and false negatives
+should be given a different weight, but we also need to measure an overall model
+accuracy of some sort.
+\section{Limitations and Possible Avenues of Continuing Work}
+This is not a real-time analysis tool that could be used ahead of time.
+However, this could be used to iteratively improve preparedness year after year
+as well as to track changes in disease spread over time.  Further analysis into
+how disease spread changes year by year could be performed.  Also, our data
+comes from a survey methodology and not EHRs or medical claims data.  This
+introduces some uncertainty into every level of our analysis.
+\bibliography{sample}
+%\appendix
+%\section*{Appendix A.}
+%Some more details about those methods, so we can actually reproduce them.
+
+\end{document}
