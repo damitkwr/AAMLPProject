@@ -19,7 +19,7 @@
 % Heading arguments are {volume}{year}{pages}{submitted}{published}{author-full-names}
 
 % Short headings should be running head and authors last names
-\ShortHeadings{95-845: AAMLP Fina Paper}{Khin and Leahy}
+\ShortHeadings{95-845: AAMLP Final Paper}{Khin and Leahy}
 \firstpageno{1}
 
 \begin{document}
@@ -286,19 +286,50 @@ models in prediction power of different classes, we created an ensemble of
 models using a weighted approach. Ensembling models is not a novel idea in
 machine learning and the benefit of ensembling models has been well
 studied.  In fact, ensemble methods are currently dominate in most Kaggle
-competitions in terms of prediction power.
+competitions in terms of prediction power. \citep{ensemblingModels} 
 
-\begin{table}[h]
+\begin{figure}[h]
 \centering
-\caption{Ensemble Model Performance}
-\label{ensembleModel}
-\begin{tabular}{ccc}
-\hline
-   & AUC ROC & Weights\\ \hline
-  Normal Dataset & 102661 & 8128\\
-\end{tabular}
-\end{table}
-\section{Discussion and Conclusion} 
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{conf_matrix_ensemble}
+  \caption{Ensemble Model Confusion Matrix}
+  \label{fig:cmatrix_ensemble}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{roc_ensemble}
+  \caption{ROC for Ensemble Model}
+  \label{fig:roc_ensemble}
+\end{subfigure}
+\caption{Ensemble Model Metrics}
+\label{fig:ensemble_model}
+\end{figure}
+\section{Discussion and Conclusion}
+Using survey data for prediction is a precarious task because of the biases
+built into the survey data. For example, there is a lot more variability in the
+data since it relies mainly on a person's recollection. We have attempted to
+improve the data quality by bringing in external data sources such as Google Flu
+Trends data and by imputing missing responses. More importantly, most modern
+machine learning models assume independent and identically distributed variables
+(i.i.d) which is not necessarily the case in the MEPS survey data.
+
+We had hoped that our ensemble model would perform best overall but we can
+clearly see from Figure \ref{fig:ensemble_model} that even though we had lower false
+positives, we had a much higher false negatives than any individual models. We
+can also see that the ensemble model did poorly in terms of AUC as well in
+Figure \ref{fig:roc_ensemble}. This could be mainly attributed to the small
+number of weights that were used to calibrate the ensemble model of the
+different base learners. \citep{ensemblingModels}
+
+However, we are pleased with the improvement of over 37\% from our baseline
+model in terms of AUC. We achieved this through careful imputation and using
+synthetic data generation methods such as SMOTE to balance the heavily
+imbalanced dataset. Possible avenues of future research could be into the use of
+modern machine learning for survey data without violating the i.i.d assumptions.
+We could investigate further into the use of text mining methods to improve the
+prediction of our algorithms using a base learner such as neural networks that
+could combine both the text analysis and the survey data analysis.
 
 \bibliography{FinalPaper}
 \end{document} 
