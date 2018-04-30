@@ -24,7 +24,7 @@
 
 \begin{document}
 
-\title{Heinz 95-845: Predicting Influenza Infection Chances and Identifying Risk Factors}
+\title{Predicting Influenza Infection Chances and Identifying Risk Factors}
 
 \author{\name Kaung Khin \email kkhin/kkhin@andrew.cmu.edu \\
        \addr Heinz College\\
@@ -243,7 +243,7 @@ support vector machines and neural networks. We have chosen not to include run
 the models on ADASYN dataset in the interest of time as grid searching
 hyper-parameters while also performing cross validation took a lot of time. We
 mitigated some of the time required by random searching instead of grid
-searching as this has been proven to be equally as good if not better. 
+searching as this has been proven to be equally as good if not better. \citep{randomsearching} 
 We used an instance of Amazon Web Service's C5 9X Large for models that uses the
 CPU while our neural network models were run on a NVIDIA GTX 1080Ti using the Keras
 library with a Tensorflow backend.
@@ -317,10 +317,11 @@ machine learning models assume independent and identically distributed variables
 We had hoped that our ensemble model would perform best overall but we can
 clearly see from Figure \ref{fig:ensemble_model} that even though we had lower false
 positives, we had a much higher false negatives than any individual models. We
-can also see that the ensemble model did poorly in terms of AUC as well in
-Figure \ref{fig:roc_ensemble}. This could be mainly attributed to the small
-number of weights that were used to calibrate the ensemble model of the
-different base learners. \citep{ensemblingModels}
+can also see that the ensemble model did not do the best in terms of AUC as we can
+see in Figure \ref{fig:roc_ensemble}. However, we do note that this ensemble
+model is only outperformed by upsampled and SMOTE random forests.
+This could be mainly attributed to the small number of weights that were used to
+calibrate the ensemble model of the different base learners. \citep{ensemblingModels}
 
 However, we are pleased with the improvement of over 37\% from our baseline
 model in terms of AUC. We achieved this through careful imputation and using
